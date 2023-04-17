@@ -20,8 +20,10 @@ return new class extends Migration
                   ->constrained()
                   ->onDelete('cascade');
             $table->timestamp('due_date');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')
+                  ->nullable();
+            $table->timestamp('end_time')
+                  ->nullable();
             $table->string('remarks',100);
             $table->foreignId('status_id')
                   ->constrained('status')
