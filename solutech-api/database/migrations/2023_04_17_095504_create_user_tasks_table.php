@@ -19,12 +19,14 @@ return new class extends Migration
             $table->foreignId('task_id')
                   ->constrained()
                   ->onDelete('cascade');
-            $table->timestamp('due_date');
+            $table->timestamp('due_date')
+                  ->nullable();
             $table->timestamp('start_time')
                   ->nullable();
             $table->timestamp('end_time')
                   ->nullable();
-            $table->string('remarks',100);
+            $table->string('remarks',100)
+                  ->nullable();
             $table->foreignId('status_id')
                   ->constrained('status')
                   ->onDelete('cascade');

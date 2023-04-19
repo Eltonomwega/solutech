@@ -12,47 +12,51 @@ use Nette\Schema\ValidationException;
 class StatusController extends ApiController
 {
 
-    private array $valid_rules= ['name'=>'required|string'];
+    private array $status_rules= ['name'=>'required|string'];
+
     /**
-     * Show all available statuses.
+     * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function get_statuses(): JsonResponse
     {
-        $statuses = Status::all();
+        $statuses = get_all(new Status);
         return $this->success_response($statuses,'Statuses fetched successfully!');
     }
 
     /**
-     * Create a status.
+     * @param string $id
+     * @return JsonResponse
      */
-    public function create(Request $request): JsonResponse
+    public function get_status(string $id): JsonResponse
+    {
+        $status = get_one(new Status);
+        return $this->success_response($status);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create_status(Request $request): JsonResponse
     {
         try {
-            $request->validate($this->valid_rules);
-            $status = Status::create(['name'=>$request->get('name')]);
-
-            return $this->success_response($status,'status created',201);
+            $status = post_record(new Status,$request,$this->status_rules);
+            return $this->success_response($status,'Created',201);
         } catch (Exception $e) {
             return $this->error_response($e->getMessage(),400);
         }
     }
 
     /**
-     * Update the specified status.
+     * @param Request $request
+     * @param string $id
+     * @return JsonResponse
      */
     public function update(Request $request, string $id): JsonResponse
     {
         try {
-            $record = Status::findOrFail($id);
-
-            foreach ($request->all() as $field => $value){
-                if (array_key_exists($field,$this->valid_rules)){
-                    $request->validate([$field=>$this->valid_rules[$field]]);
-                    $record->$field = $value;
-                }
-            }
-            $record->save();
-            return $this->success_response($record,'Updated');
+            $status = update_record(new Status,$request,$id,$this->status_rules);
+            return $this->success_response($status,'Updated');
 
         }catch (Exception $e){
             return $this->error_response($e->getMessage(),400);
@@ -60,13 +64,14 @@ class StatusController extends ApiController
     }
 
     /**
-     * Remove the specified status from storage.
+     * @param string $id
+     * @return JsonResponse
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy_status(string $id): JsonResponse
     {
         try {
-            Status::destroy([$id]);
-            return $this->success_response(null,'Deleted');
+            $status = delete_record(new Status,$id);
+            return $this->success_response($status,'Deleted');
         }catch (Exception $e){
             return $this->error_response($e->getMessage());
         }
