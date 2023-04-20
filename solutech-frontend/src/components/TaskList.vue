@@ -1,0 +1,58 @@
+<template>
+    <div class="container">
+      <div class="title mb-5">
+        <h1>Tasks</h1>
+      </div>
+      <div class="tasks">
+        <TaskItem v-for="(task, index) in tasks" :key="index" :task="task">
+            <template v-slot:divider v-if="index != tasks.length-1">
+                <div class="divider"></div>
+            </template>
+        </TaskItem>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  import TaskItem from './TaskItem.vue';
+  import axios from 'axios';
+  
+  export default {
+    name: 'TaskList',
+    components:{
+      TaskItem
+    },
+    data() {
+      return {
+        tasks: []
+      };
+    },
+    mounted() {
+      const userId = localStorage.getItem('id');
+      const accessToken = `Bearer ${localStorage.getItem("access_token")}`;
+      if (userId) {
+        axios.get(`http://127.0.0.1:8000/api/tasks/user/${userId}`,{
+            headers:{
+                Authorization:accessToken
+            }
+        })
+          .then(response => {
+            this.tasks = response.data.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        // handle case where user id is missing in local storage
+      }
+    }
+  }
+  </script>
+  
+  <style>
+  .divider{
+    margin: 20px 0;
+    border-bottom: 1px solid #35495e;
+  }
+  </style>
+  
