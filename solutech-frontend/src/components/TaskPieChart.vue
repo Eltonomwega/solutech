@@ -21,6 +21,7 @@ export default {
       (task) => task.status === "Complete"
     );
     const activeTasks = this.tasks.filter((task) => task.status === "Active");
+    console.log(pendingTasks);
     const pieChart = new Chart(this.$refs.pieChart, {
       type: "pie",
       data: {
@@ -28,11 +29,7 @@ export default {
         datasets: [
           {
             label: "Tasks",
-            data: [
-              pendingTasks.length,
-              completeTasks.length,
-              activeTasks.length,
-            ],
+            data: [3, 2, 6],
             backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
           },
         ],
