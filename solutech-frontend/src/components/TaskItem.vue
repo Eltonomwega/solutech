@@ -68,7 +68,7 @@ export default {
   computed: {},
   methods: {
     statusColor(status) {
-      if (status === "Completed") return "#42b883";
+      if (status === "Complete") return "#42b883";
       else if (status === "Pending") return "#FFCE56";
       else return "#379fe5";
     },
