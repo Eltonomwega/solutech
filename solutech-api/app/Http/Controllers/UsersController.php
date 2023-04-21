@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserTasks;
+use App\Models\Status;
+use App\Models\Tasks;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,10 +13,10 @@ class UsersController extends ApiController
     private array $user_task_rules=[
         'user_id'=>'required|integer',
         'task_id'=>'required|integer',
-        'due_date'=>'date',
-        'start_time'=>'date',
-        'end_time'=>'date',
-        'remark'=>'string',
+        'due_date'=>'date|nullable',
+        'start_time'=>'date|nullable',
+        'end_time'=>'date|nullable',
+        'remarks'=>'string|nullable',
         'status_id'=>'required|integer'
     ];
 
@@ -33,7 +35,28 @@ class UsersController extends ApiController
      */
     public function get_user_tasks(string $id):JsonResponse
     {
-        $user_task = get_one(new UserTasks,$id);
+        $user_tasks = get_one(new UserTasks,$id,'user_id')->get();
+        $result = array();
+        foreach($user_tasks as $user_task){
+            $task = Tasks::find($user_task->task_id);
+            $status = Status::find($user_task->status_id);
+            $user_task->task = $task->name;
+            $user_task->description = $task->description;
+            $user_task->status = $status->name;
+            array_push($result,$user_task);
+        }
+        return $this->success_response($result,'Fetched');
+    }
+
+    public function get_one_user_task(string $id):JsonResponse
+    {
+        $user_task = UserTasks::find($id);
+        $task = Tasks::find($user_task->task_id);
+        $status = Status::find($user_task->status_id);
+        $user_task->task = $task->name;
+        $user_task->description = $task->description;
+        $user_task->status = $status->name;
+
         return $this->success_response($user_task,'Fetched');
     }
 

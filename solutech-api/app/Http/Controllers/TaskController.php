@@ -15,8 +15,8 @@ class TaskController extends ApiController
 {
     private array $task_rules= [
         'name'=>'required|string',
-        'description'=>'string',
-        'due_date'=>'date',
+        'description'=>'string|nullable',
+        'due_date'=>'date|nullable',
         'status_id'=>'integer'
     ];
 
@@ -32,7 +32,7 @@ class TaskController extends ApiController
     public function get_task(string $id):JsonResponse
     {
         try {
-            $task = get_one(new Tasks,$id);
+            $task = get_one(new Tasks,$id)->first();
             return $this->success_response($task,'Fetched');
 
         }catch (Exception $e){

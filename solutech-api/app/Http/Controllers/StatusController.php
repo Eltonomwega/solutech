@@ -29,7 +29,7 @@ class StatusController extends ApiController
      */
     public function get_status(string $id): JsonResponse
     {
-        $status = get_one(new Status);
+        $status = get_one(new Status,$id)->first();
         return $this->success_response($status);
     }
 

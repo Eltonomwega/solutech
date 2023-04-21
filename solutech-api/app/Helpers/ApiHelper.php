@@ -11,8 +11,8 @@ if(!function_exists('get_all')){
 }
 
 if(!function_exists('get_one')){
-    function get_one(Model $model,string $id){
-        return $model::where('deleted_at','=',null)->where('id','=',$id)->get();
+    function get_one(Model $model,string $id,string $property=null){
+        return $model::where('deleted_at','=',null)->where($property??'id','=',$id);
     }
 }
 

@@ -45,6 +45,7 @@ Route::middleware(['auth:api'])->group(function ($router){
         Route::prefix('user')->group(function (){
             Route::get('/',[UsersController::class, 'get_users_tasks']);
             Route::get('/{id}',[UsersController::class, 'get_user_tasks']);
+            Route::get('/task/{id}',[UsersController::class,'get_one_user_task']);
             Route::post('/',[UsersController::class,'create_user_task']);
             Route::patch('/{id}',[UsersController::class,'update_user_task']);
             Route::delete('/{id}',[UsersController::class,'destroy_user_task']);
