@@ -111,7 +111,6 @@ export default {
       })
       .then((response) => {
         this.statuses = response.data.data;
-        console.log(response.data.data);
       });
     if (this.action === "Edit") {
       const id = this.$route.params.id;
