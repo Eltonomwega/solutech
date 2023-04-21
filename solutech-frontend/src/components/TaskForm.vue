@@ -135,7 +135,7 @@ export default {
     addTask() {
       const accessToken = `Bearer ${localStorage.getItem("access_token")}`;
       const user_id = parseInt(localStorage.getItem("id"));
-      let baseUrl = "http://127.0.0.1:8000";
+      let baseUrl = import.meta.env.VITE_API_URL;
       let endpoint =
         this.action === "Add"
           ? `${baseUrl}/api/tasks/user`
