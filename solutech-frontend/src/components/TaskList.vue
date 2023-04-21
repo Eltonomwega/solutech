@@ -6,6 +6,7 @@
         <RouterLink to="/task" class="btn btn-outline-dark">
           <img src="@/assets/img/IconPlus.svg" alt="Add a Task" />
         </RouterLink>
+        <DownloadXLSX :tasks="tasks" />
       </div>
     </div>
     <div class="tasks">
@@ -25,12 +26,14 @@
 
 <script>
 import TaskItem from "./TaskItem.vue";
+import DownloadXLSX from "./DownloadXLSX.vue";
 import axios from "axios";
 
 export default {
   name: "TaskList",
   components: {
     TaskItem,
+    DownloadXLSX,
   },
   data() {
     return {
@@ -73,5 +76,8 @@ export default {
 .divider {
   margin: 20px 0;
   border-bottom: 1px solid #35495e;
+}
+.download-btn {
+  margin-left: 10px;
 }
 </style>
