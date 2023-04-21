@@ -4,6 +4,7 @@ import Auth from "../Auth.vue";
 import Layout from "../Layout.vue";
 import LoginView from "../views/LoginView.vue";
 import TaskForm from "../components/TaskForm.vue";
+import jwtDecode from "jwt-decode";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,7 +50,13 @@ router.beforeEach((to, from, next) => {
   if (to.path !== "/login" && !isAuthenticated) {
     next("/login");
   } else {
-    next();
+    const { exp } = jwtDecode(isAuthenticated);
+    const currentTime = Date.now() / 1000;
+    console.log(currentTime);
+    console.log(exp);
+    if (exp < currentTime && to.path !== "/login") {
+      next("/login");
+    } else next();
   }
 });
 

@@ -30,23 +30,23 @@
         />
       </div>
       <div class="col-12">
-        <label for="start_date" class="form-label">Start Date</label>
+        <label for="start_time" class="form-label">Start Date</label>
         <input
           type="datetime-local"
           class="form-control"
-          name="start_date"
-          id="start_date"
-          v-model="task.start_date"
+          name="start_time"
+          id="start_time"
+          v-model="task.start_time"
         />
       </div>
       <div class="col-12">
-        <label for="end_date" class="form-label">End Date</label>
+        <label for="end_time" class="form-label">End Date</label>
         <input
           type="datetime-local"
           class="form-control"
-          name="end_date"
-          id="end_date"
-          v-model="task.end_date"
+          name="end_time"
+          id="end_time"
+          v-model="task.end_time"
         />
       </div>
       <div class="col-12">
