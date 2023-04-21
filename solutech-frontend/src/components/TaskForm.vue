@@ -177,5 +177,6 @@ export default {
 <style scoped>
 .container {
   max-width: 600px;
+  padding: 10px;
 }
 </style>

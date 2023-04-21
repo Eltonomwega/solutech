@@ -92,6 +92,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  padding: 10px;
+}
 .info {
   background-color: #35495e;
   height: 30vh;
