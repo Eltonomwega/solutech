@@ -50,13 +50,14 @@ router.beforeEach((to, from, next) => {
   if (to.path !== "/login" && !isAuthenticated) {
     next("/login");
   } else {
-    const { exp } = jwtDecode(isAuthenticated);
-    const currentTime = Date.now() / 1000;
-    console.log(currentTime);
-    console.log(exp);
-    if (exp < currentTime && to.path !== "/login") {
-      next("/login");
-    } else next();
+    if (isAuthenticated !== null) {
+      const { exp } = jwtDecode(isAuthenticated);
+      const currentTime = Date.now() / 1000;
+      if (exp < currentTime && to.path !== "/login") {
+        next("/login");
+      }
+    }
+    next();
   }
 });
 
