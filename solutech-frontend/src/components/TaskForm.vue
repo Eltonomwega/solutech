@@ -104,7 +104,7 @@ export default {
     const accessToken = `Bearer ${localStorage.getItem("access_token")}`;
     // get all statuses
     axios
-      .get(`http://127.0.0.1:8000/api/status/`, {
+      .get(`${import.meta.env.VITE_API_URL}/status/`, {
         headers: {
           Authorization: accessToken,
         },
@@ -117,7 +117,7 @@ export default {
       const id = this.$route.params.id;
       if (id) {
         axios
-          .get(`http://127.0.0.1:8000/api/tasks/user/task/${id}`, {
+          .get(`${import.meta.env.VITE_API_URL}/tasks/user/task/${id}`, {
             headers: {
               Authorization: accessToken,
             },

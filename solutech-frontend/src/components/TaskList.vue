@@ -42,7 +42,7 @@ export default {
     const accessToken = `Bearer ${localStorage.getItem("access_token")}`;
     if (userId) {
       axios
-        .get(`http://127.0.0.1:8000/api/tasks/user/${userId}`, {
+        .get(`${import.meta.env.VITE_API_URL}/tasks/user/${userId}`, {
           headers: {
             Authorization: accessToken,
           },

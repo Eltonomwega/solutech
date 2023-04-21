@@ -11,7 +11,7 @@
       <div class="task-name col-9">
         <h5>{{ task.task }}</h5>
       </div>
-      <div class="task-status col-3">
+      <div class="task-status col-3 d-none d-md-block">
         <div
           class="btn-status d-inline-block px-2 py-1"
           :style="`background-color: ${statusColor(task.status)}`"
@@ -20,7 +20,7 @@
         </div>
       </div>
     </a>
-    <div class="action col-3">
+    <div class="action col-3 d-flex d-md-block">
       <RouterLink
         :to="{ name: 'edit-task', params: { id: task.id } }"
         class="btn btn-outline-info m-1"
@@ -76,7 +76,7 @@ export default {
       if (confirm("Are you sure you want to delete this task?")) {
         const accessToken = `Bearer ${localStorage.getItem("access_token")}`;
         axios
-          .delete(`http://127.0.0.1:8000/api/tasks/user/${id}`, {
+          .delete(`${import.meta.env.VITE_API_URL}/tasks/user/${id}`, {
             headers: {
               Authorization: accessToken,
             },
