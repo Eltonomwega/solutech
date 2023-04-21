@@ -138,11 +138,11 @@ export default {
       let baseUrl = import.meta.env.VITE_API_URL;
       let endpoint =
         this.action === "Add"
-          ? `${baseUrl}/api/tasks/user`
-          : `${baseUrl}/api/tasks/user/${this.$route.params.id}`;
+          ? `${baseUrl}/tasks/user`
+          : `${baseUrl}/tasks/user/${this.$route.params.id}`;
       const method = this.action === "Add" ? "post" : "patch";
       axios[method](
-        `${baseUrl}/api/tasks/${method === "patch" ? this.task.task_id : ""}`,
+        `${baseUrl}/tasks/${method === "patch" ? this.task.task_id : ""}`,
         {
           name: this.task.task,
           description: this.task.description,
