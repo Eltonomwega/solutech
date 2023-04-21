@@ -22,11 +22,16 @@
       </TaskItem>
     </div>
   </div>
+  <div class="container d-flex justify-content-center">
+    <TaskPieChart :tasks="tasks" />
+  </div>
 </template>
 
 <script>
 import TaskItem from "./TaskItem.vue";
 import DownloadXLSX from "./DownloadXLSX.vue";
+import TaskPieChart from "./TaskPieChart.vue";
+
 import axios from "axios";
 
 export default {
@@ -34,6 +39,7 @@ export default {
   components: {
     TaskItem,
     DownloadXLSX,
+    TaskPieChart,
   },
   data() {
     return {
