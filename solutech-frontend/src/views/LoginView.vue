@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .container {
-  padding: 10px;
+  padding: 10px !important;
 }
 .info {
   background-color: #35495e;
