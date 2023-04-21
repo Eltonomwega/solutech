@@ -33,7 +33,7 @@ export default {
               completeTasks.length,
               activeTasks.length,
             ],
-            backgroundColor: ["#FFCE56", "#42b883", "#379fe5"],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
           },
         ],
       },

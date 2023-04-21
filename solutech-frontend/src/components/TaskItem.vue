@@ -69,7 +69,7 @@ export default {
   methods: {
     statusColor(status) {
       if (status === "Completed") return "#42b883";
-      else if (status === "Pending") return "#d9e537";
+      else if (status === "Pending") return "#FFCE56";
       else return "#379fe5";
     },
     deleteTask(id) {
